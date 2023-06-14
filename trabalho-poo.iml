@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/packages/lwjgl/lwjgl-natives-linux-arm32.jar!/" />
+          <root url="jar://$MODULE_DIR$/packages/lwjgl/lwjgl-natives-linux-arm64.jar!/" />
+          <root url="jar://$MODULE_DIR$/packages/lwjgl/lwjgl-natives-linux.jar!/" />
+          <root url="jar://$MODULE_DIR$/packages/lwjgl/lwjgl-natives-macos-arm64.jar!/" />
+          <root url="jar://$MODULE_DIR$/packages/lwjgl/lwjgl-natives-macos.jar!/" />
+          <root url="jar://$MODULE_DIR$/packages/lwjgl/lwjgl-natives-windows-arm64.jar!/" />
+          <root url="jar://$MODULE_DIR$/packages/lwjgl/lwjgl-natives-windows-x86.jar!/" />
+          <root url="jar://$MODULE_DIR$/packages/lwjgl/lwjgl-natives-windows.jar!/" />
+          <root url="jar://$MODULE_DIR$/packages/lwjgl/lwjgl.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/packages/lwjgl/lwjgl-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/packages/lwjgl-glfw" />
+          <root url="file://$MODULE_DIR$/packages/lwjgl-opengl" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/packages/lwjgl-glfw" />
+          <root url="file://$MODULE_DIR$/packages/lwjgl-opengl" />
+          <root url="file://$MODULE_DIR$/src" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/packages/lwjgl-glfw" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/packages/lwjgl-opengl" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/packages/lwjgl-glfw" recursive="false" type="SOURCES" />
+        <jarDirectory url="file://$MODULE_DIR$/packages/lwjgl-opengl" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
+  </component>
+</module>
