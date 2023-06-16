@@ -20,7 +20,7 @@ public class Main {
         System.out.println("Hello LWJGL " + Version.getVersion() + "!");
 
         init();
-        loop();
+//        loop();
 
         // Free the window callbacks and destroy the window
         glfwFreeCallbacks(window);
@@ -46,7 +46,7 @@ public class Main {
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
 
         // Create the window
-        window = glfwCreateWindow(300, 300, "Hello World!", NULL, NULL);
+        window = glfwCreateWindow(640, 480, "Joguin", 0, 0);
         if ( window == NULL )
             throw new RuntimeException("Failed to create the GLFW window");
 
@@ -82,34 +82,87 @@ public class Main {
 
         // Make the window visible
         glfwShowWindow(window);
-    }
 
-    private void loop() {
+
         // This line is critical for LWJGL's interoperation with GLFW's
-        // OpenGL context, or any context that is managed externally.
-        // LWJGL detects the context that is current in the current thread,
-        // creates the GLCapabilities instance and makes the OpenGL
-        // bindings available for use.
+        //OpenGL context, or any context that is managed externally.
+        //LWJGL detects the context that is current in the current thread,
+        //creates the GLCapabilities instance and makes the OpenGL
+        //bindings available for use.
         GL.createCapabilities();
 
-        // Set the clear color
-        glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+        glEnable(GL_TEXTURE_2D);
 
-        // Run the rendering loop until the user has attempted to close
-        // the window or has pressed the ESCAPE key.
+        float[] vertices = new float[] {
+                -0.5f, 0.5f, 0,
+                0.5f, 0.5f, 0,
+                0.5f, -0.5f, 0,
+
+                0.5f, -0.5f, 0,
+                -0.5f, -0.5f, 0,
+                -0.5f, 0.5f, 0,
+
+        };
+
+        float[] texture = new float[] {
+                0,0,
+                1,0,
+                1,1,
+
+                1,1,
+                0,1,
+                0,0
+
+        };
+
+        Model model = new Model(vertices, texture);
+
+        Texture tex = new Texture("./res/0.png");
+
         while ( !glfwWindowShouldClose(window) ) {
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
-            glfwSwapBuffers(window); // swap the color buffers
 
-            // Poll for window events. The key callback above will only be
-            // invoked during this call.
+            if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GL_TRUE) {
+                glfwSetWindowShouldClose(window, true);
+                System.out.println("teclando no ESC");
+            }
+
+            if(glfwGetMouseButton(window, 0) == GL_TRUE){
+                System.out.println("clicando com botao esquerdo mouse");
+            }
+
             glfwPollEvents();
+
+
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
+            // Set the clear color
+            //glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+
+            tex.bind();
+
+            model.render();
+
+//            glBegin(GL_QUADS);
+//                glTexCoord2f(0, 0);
+//                glVertex2f(-0.5f, 0.5f);
+//
+//                glTexCoord2f(1, 0);
+//                glVertex2f(0.5f, 0.5f);
+//
+//                glTexCoord2f(1, 1);
+//                glVertex2f(0.5f, -0.5f);
+//
+//                glTexCoord2f(0, 1);
+//                glVertex2f(-0.5f, -0.5f);
+//            glEnd();
+
+            glfwSwapBuffers(window);
         }
     }
 
     public static void main(String[] args) {
-//        (new Main()).run();
+        (new Main()).run();
         System.out.println("Hello World!");
     }
+
 }
