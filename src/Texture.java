@@ -1,4 +1,5 @@
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL13.*;
 import org.lwjgl.BufferUtils;
 
 import javax.imageio.ImageIO;
@@ -53,7 +54,10 @@ public class Texture {
         }
     }
 
-    public void bind(){
-        glBindTexture(GL_TEXTURE_2D, id);
+    public void bind( int sampler ){
+        if(sampler >= 0 && sampler <= 31){
+            glActiveTexture(GL_TEXTURE0 + sampler);//vincula ao primeiro sampler q é um avo para texura
+            glBindTexture(GL_TEXTURE_2D, id);
+        }
     }
 }

@@ -1,3 +1,5 @@
+
+import org.joml.Matrix4f;
 import org.lwjgl.*;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
@@ -97,10 +99,7 @@ public class Main {
                 -0.5f, 0.5f, 0,
                 0.5f, 0.5f, 0,
                 0.5f, -0.5f, 0,
-
-                0.5f, -0.5f, 0,
                 -0.5f, -0.5f, 0,
-                -0.5f, 0.5f, 0,
 
         };
 
@@ -108,16 +107,21 @@ public class Main {
                 0,0,
                 1,0,
                 1,1,
-
-                1,1,
                 0,1,
-                0,0
 
         };
 
-        Model model = new Model(vertices, texture);
+        int[] indices = new int[] {
+                0,1,2,
+                2,3,0
+        };
 
+        Model model = new Model(vertices, texture, indices);
+
+        Shader shader = new Shader("shader");
         Texture tex = new Texture("./res/0.png");
+
+        Matrix4f projection = new Matrix4f().ortho2D(-640/2, 640/2, 480/2, -480/2); //definindo a origem dos graficos no centro da tela de 640x480
 
         while ( !glfwWindowShouldClose(window) ) {
 
@@ -130,6 +134,9 @@ public class Main {
             if(glfwGetMouseButton(window, 0) == GL_TRUE){
                 System.out.println("clicando com botao esquerdo mouse");
             }
+            if(glfwGetMouseButton(window, 1) == GL_TRUE){
+                System.out.println("clicando com botao direito mouse");
+            }
 
             glfwPollEvents();
 
@@ -138,23 +145,14 @@ public class Main {
             // Set the clear color
             //glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
 
-            tex.bind();
 
+            shader.bind();
+            shader.setUniform("sampler", 0);
+            shader.setUniform("projection", projection);
+            tex.bind(0);
             model.render();
 
-//            glBegin(GL_QUADS);
-//                glTexCoord2f(0, 0);
-//                glVertex2f(-0.5f, 0.5f);
-//
-//                glTexCoord2f(1, 0);
-//                glVertex2f(0.5f, 0.5f);
-//
-//                glTexCoord2f(1, 1);
-//                glVertex2f(0.5f, -0.5f);
-//
-//                glTexCoord2f(0, 1);
-//                glVertex2f(-0.5f, -0.5f);
-//            glEnd();
+
 
             glfwSwapBuffers(window);
         }
